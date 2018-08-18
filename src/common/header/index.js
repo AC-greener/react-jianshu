@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
-import {CSSTransition} from 'react-transition-group';
-import {actionCreators} from './store/index';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { CSSTransition } from 'react-transition-group';
+import { actionCreators } from './store/index';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 import {
     HeaderWrapper,
     Logo,
@@ -57,7 +58,9 @@ class Header extends Component{
     render() {
         return (
             <HeaderWrapper>
-                <Logo />
+                <Link to='/'>
+                    <Logo />
+                </Link>
                 <Nav>
                     <NavItem className='left active'>首页</NavItem>
                     <NavItem className='left'>下载App</NavItem>
@@ -109,7 +112,7 @@ const mapStateProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         handleInputFocus(list) {
-            if(list.size <= 0) {
+            if(list.size <= 0) {    // 减少不必要的ajax请求
                 dispatch(actionCreators.getList());
             }
             dispatch(actionCreators.searchFocus());
@@ -129,10 +132,10 @@ const mapDispatchToProps = (dispatch) => {
             if(originAngle) {
                 originAngle = parseInt(originAngle, 10);
             } else {
-                originAngle = 10;
+                originAngle = 0;
             }
             spin.style.tansform = 'rotate(' + (originAngle + 360)+ 'deg)'
-            console.log(spin.style.tansform);
+            // console.log(spin.style.tansform);
             if(page < totalPage) {
                 dispatch(actionCreators.pageChange(page + 1));
             } else {

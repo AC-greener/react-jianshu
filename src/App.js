@@ -1,13 +1,22 @@
-import React, { Component } from 'react';
-import {Provider} from 'react-redux';
+import React, { Component } from 'react'
+import {Provider} from 'react-redux'
+import { BrowserRouter, Route} from 'react-router-dom'
 import Header from './common/header/index'
-import store from './store/index';
+import Home from './pages/home/index'
+import store from './store/index'
+import Detail from './pages/detail';
+
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-      {/* 让headr组件拿到store */}
-        <Header />
+      <Provider store={store}>      
+        <BrowserRouter>
+          <div>
+            <Header />
+            <Route path='/' exact component={Home}></Route>
+            <Route path='/detail' exact  component={Detail}></Route>
+          </div>
+        </BrowserRouter>
       </Provider>
     );
   }
