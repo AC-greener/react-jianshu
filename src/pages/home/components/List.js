@@ -5,12 +5,13 @@ import { actionCreators } from '../store/index'
 import { Link } from 'react-router-dom'
 class List extends PureComponent {
   render() {
+
     return (
       <div>
           {
             this.props.articleList.map((item, index) => {
               return (
-                <Link key={index} to='/detail'>
+                <Link key={index} to={'/detail/' + item.get('id')}>
                   <ListItem >
                     <img className='pic' src={item.get('imgUrl')} alt='' />
                     <ListInfo>

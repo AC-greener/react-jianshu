@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { actionCreators } from './store/index';
+import { actionCreators as loginActionCreators } from '../../pages/login/store/index';
+// 改变login组件对应的数据，所以要引入loginActionCreators
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import {
@@ -64,7 +66,11 @@ class Header extends Component{
                 <Nav>
                     <NavItem className='left active'>首页</NavItem>
                     <NavItem className='left'>下载App</NavItem>
-                    <NavItem className='right'>登陆a</NavItem>
+                    {
+                        this.props.login ? 
+                        <NavItem className='right' onClick={this.props.logout}>退出</NavItem> : 
+                        <Link to='/login'><NavItem className='right'>登陆</NavItem></Link>
+                    }
                     <NavItem className='right'>
                         <i className='iconfont'>&#xe636;</i>
                     </NavItem>
@@ -87,8 +93,13 @@ class Header extends Component{
 
                 </Nav>
                 <Addition>
-                    <Button className='writting'>注册</Button>
-                    <Button className='reg'>写文章</Button>
+                    <Link to='/write'>
+                        <Button className='writting'>
+                            <i className='iconfont'>&#xe615;</i>
+                            写文章
+                        </Button>
+                    </Link>
+                    <Button className='reg'>注册</Button>
                 </Addition>
             </HeaderWrapper>
         );
@@ -104,6 +115,7 @@ const mapStateProps = (state) => {
         page: state.get("header").get("page"),
         totalPage: state.get("header").get("totalPage"),
         mouseIn: state.get("header").get("mouseIn"),
+        login: state.getIn(['login', 'login'])
     }
 }
 
@@ -142,6 +154,9 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(actionCreators.pageChange(1));            
             }
         },
+        logout() {
+            dispatch(loginActionCreators.logout())
+        }
     }
 }
 

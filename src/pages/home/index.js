@@ -56,7 +56,6 @@ const mapDispatch = (dispatch) =>({
     dispatch(action)    //派发了一个函数
   },
   changeScrollTopShow() {
-    console.log(document.documentElement.scrollTop)
     if(document.documentElement.scrollTop > 200) {
       dispatch(actionCreators.watchScrollTop(true))
     } else {
