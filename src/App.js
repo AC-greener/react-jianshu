@@ -5,7 +5,7 @@ import store from './store/index'
 
 import Header from './common/header/index'
 import Home from './pages/home/index'
-import Detail from './pages/detail/index';
+import Detail from './pages/detail/loadable.js';
 import Login from './pages/login/index';
 import Write from './pages/write/index';
 
