@@ -5,7 +5,7 @@ export const HeaderWrapper = styled.div`
 	z-index: 1;
 	position: relative;
 	height: 56px;
-	border-bottom: 1px solid #f0f0f0;
+	border-bottom: 2px solid #f0f0f0;
 `;
 
 export const Logo = styled.div`
@@ -20,7 +20,7 @@ export const Logo = styled.div`
 `;
 
 export const Nav = styled.div`
-	width: 960px;
+	max-width: 960px;
 	height: 100%;
 	padding-right: 70px;
 	box-sizing: border-box;
@@ -28,16 +28,24 @@ export const Nav = styled.div`
 `;
 
 export const NavItem = styled.div`
+	&.cursor:hover {
+		cursor: pointer
+	}
 	line-height: 56px;
 	padding: 0 15px;
 	font-size: 17px;
 	color: #333;
 	&.left {
 		float: left;
+		margin-left:70px;
 	}
 	&.right {
 		float: right;
+		// margin-right:70px;
 		color: #969696;
+	}
+	.iconfont {
+		margin-right:70px;
 	}
 	&.active {
 		color: #ea6f5a;
@@ -168,5 +176,9 @@ export const Button = styled.div`
 	&.writting {
 		color: #fff;
 		background: #ec6149;
+		opacity: .8;
+	}
+	&.writting:hover {
+		opacity: 1
 	}
 `

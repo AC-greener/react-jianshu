@@ -64,16 +64,10 @@ class Header extends Component{
                     <Logo />
                 </Link>
                 <Nav>
-                    <NavItem className='left active'>首页</NavItem>
-                    <NavItem className='left'>下载App</NavItem>
-                    {
-                        this.props.login ? 
-                        <NavItem className='right' onClick={this.props.logout}>退出</NavItem> : 
-                        <Link to='/login'><NavItem className='right'>登陆</NavItem></Link>
-                    }
-                    <NavItem className='right'>
-                        <i className='iconfont'>&#xe636;</i>
-                    </NavItem>
+                    <NavItem className='left active cursor bounceInLeft' >首页</NavItem>
+                    <NavItem className='left cursor'>下载App</NavItem>
+                    
+                    
                     <SearchWrapper>
                         <CSSTransition
                             in={this.props.focused}
@@ -90,16 +84,23 @@ class Header extends Component{
                         <i className={this.props.focused ? 'focused iconfont zoom': 'iconfont zoom'}>&#xe614;</i>
                         {this.getListArea()}
                     </SearchWrapper>
-
+                    <NavItem className='right cursor'>
+                        <i className='iconfont '>&#xe636;</i>
+                    </NavItem>
+                {
+                    this.props.login ? 
+                    <NavItem className='right cursor' onClick={this.props.logout}>退出</NavItem> : 
+                    <Link to='/login'><NavItem className='right'>登陆</NavItem></Link>
+                }
                 </Nav>
                 <Addition>
                     <Link to='/write'>
                         <Button className='writting'>
-                            <i className='iconfont'>&#xe615;</i>
+                            <i className='iconfont '>&#xe615;</i>
                             写文章
                         </Button>
                     </Link>
-                    <Button className='reg'>注册</Button>
+                    {/* <Button className='reg'>注册</Button> */}
                 </Addition>
             </HeaderWrapper>
         );
@@ -141,12 +142,12 @@ const mapDispatchToProps = (dispatch) => {
         },
         handlePageChange(page, totalPage, spin) {
             let originAngle = spin.style.transform.replace(/[^0-9]/ig, '');
-            if(originAngle) {
-                originAngle = parseInt(originAngle, 10);
-            } else {
-                originAngle = 0;
-            }
-            spin.style.tansform = 'rotate(' + (originAngle + 360)+ 'deg)'
+			if (originAngle) {
+				originAngle = parseInt(originAngle, 10);
+			}else {
+				originAngle = 0;
+			}
+            spin.style.transform = 'rotate(' + (originAngle + 360) + 'deg)';
             // console.log(spin.style.tansform);
             if(page < totalPage) {
                 dispatch(actionCreators.pageChange(page + 1));
