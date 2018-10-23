@@ -20,7 +20,7 @@ export const LoginBox = styled.div`
 	background: #fff;
 	box-shadow: 0 0 8px rgba(0,0,0,.2);
 	background-size: 140px;
-  border-radius: 10px;
+  border-radius: 5px;
   background-repeat: repeat-x repeat-y;
 `;
 
