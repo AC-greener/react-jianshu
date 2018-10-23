@@ -16,14 +16,17 @@ class Login extends PureComponent {
       return (
         <LoginWrapper>
           <LoginBox>
-            <Input placeholder='用户名' innerRef={(input) => {this.account = input}} />
+            {/* <Input placeholder='用户名' innerRef={(input) => {this.account = input}} />
             <Input placeholder='密码' type='password' innerRef={(input) => {this.password= input}}/>
-            <Button onClick={() => this.props.login(this.account, this.password)}>登录</Button>
+            <Button onClick={() => this.props.login(this.account, this.password)}>登 录</Button> */}
           </LoginBox>
+
         </LoginWrapper>
+        // <img src='../../statics/formBorder.png' alt='' />
+
       )  
     } else {
-     return <Redirect to='/' />
+      return <Redirect to='/' />
     }
   }
 }

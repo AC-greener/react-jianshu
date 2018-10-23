@@ -4,9 +4,10 @@ import { connect } from 'react-redux'
 class Writer extends PureComponent {
   render() {
     return (
-      <WriterWrapper>
-        HomeWork
-      </WriterWrapper>
+      <div></div>
+      // <WriterWrapper>
+      //   HomeWork
+      // </WriterWrapper>
     )
   }
 }

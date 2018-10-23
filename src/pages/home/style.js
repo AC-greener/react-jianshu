@@ -101,6 +101,9 @@ export const WriterWrapper = styled.div`
 `;
 
 export const LoadMore = styled.div`
+	:hover {
+		background: #ec6149;
+	}
 	width: 100%;
 	height: 40px;
 	line-height: 40px;
