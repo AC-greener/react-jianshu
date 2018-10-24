@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { actionCreators }from './store/index'
 import { Redirect } from 'react-router-dom'
+
 import {
   LoginWrapper,
   LoginBox,
