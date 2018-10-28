@@ -9,14 +9,16 @@ class Topic extends PureComponent {
         {
           this.props.list.map((item) => {
             return (
-              <TopicItem key={item.get('id')}>
-                <img
-                  className='topic-pic'
-                  src={item.get('imgUrl')}
-                  alt=''
-                />
-                {item.get('title')}
-              </TopicItem>
+              <a href= 'https://www.jianshu.com/c/8c92f845cd4d?utm_medium=index-collections&utm_source=desktop'>
+                <TopicItem key={item.get('id')}>
+                  <img
+                    className='topic-pic'
+                    src={item.get('imgUrl')}
+                    alt=''
+                  />
+                  {item.get('title')}
+                </TopicItem>
+              </a>
             )
           })
         }
