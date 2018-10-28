@@ -13,9 +13,81 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">
     <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />  
-  
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />  
     <title>React App</title>
+    <style>
+        img {
+            width: 625px;
+            height: 270px;
+        }
+        #container {
+        border-radius: 3px;
+        width: 625px;;
+        height: 270px;
+        overflow: hidden; 
+        position: relative;
+        }
+        #list {
+            width: 4375px;
+            height: 270px;
+            position: absolute; 
+            /* z-index: 1;	 */
+        }
+        #list img { 
+            float: left;
+        }
+        #buttons { 
+            position: absolute; 
+            height: 10px; 
+            width: 100px; 
+            /* z-index: 2;  */
+            bottom: 20px; 
+            left: 250px;  /*居中*/
+        }
+        #buttons span {
+            cursor: pointer; /*定义光标*/
+            float: left; 
+            border: 1px solid #fff;
+            width: 10px; 
+            height: 10px; 
+            border-radius: 50%; /*将边框变成圆*/
+            background: #333; 
+            margin-right: 5px;
+        }
+        #buttons .on {
+            background: orangered;
+        }
+        .arrow { /*设置箭头的背景*/
+            cursor: pointer; 
+            display: none; 
+            line-height: 39px; 
+            text-align: center; 
+            font-size: 36px; 
+            font-weight: bold; /*  字体加粗  */
+            width: 40px; 
+            height: 40px; 
+            position: absolute; 
+            /* z-index: 2;  */
+            top: 180px;
+            background-color: RGBA(0,0,0,.3); /*背景模糊度*/
+            color: #fff;
+        }
+        .arrow:hover { 
+            background-color: RGBA(0,0,0,0.7);
+        }
+        #container:hover .arrow {   /***移动到容器里面时***/
+            display: block;
+        }
+        #prev { 
+        top: 130px;
+            left: 20px;
+        }
+        #next { 
+        top: 130px;
+            right: 20px;
+        }
+
+    </style>
   </head>
   <body>
   
@@ -30,5 +102,115 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script >
+    window.onload = function (){
+    var container = document.getElementById("container");
+    var list = document.getElementById("list");
+    var buttons = document.getElementById("buttons").getElementsByTagName("span");
+    var prev = document.getElementById("prev");
+    var next = document.getElementById("next");
+    var index = 1;  /* 用于表示亮起小圆点的索引*/
+    var animated = false;  /*表示是否正在进行动画*/
+
+    //每次点击图片时，使对应的小圆圈亮起来
+    function showBottons () {
+        for(var i = 0; i < buttons.length; i++) {
+            if(buttons[i].className == "on") {
+                buttons[i].className = "";
+                break;
+            }
+        }
+        buttons[index - 1].className = "on";
+    }
+
+    //给图片切换加上过渡动画
+    function animate (offset) {
+
+        var newleft = parseInt(list.style.left) + offset;  //当前元素的left值加上要偏移的量
+        var time = 300; //在300毫秒之内完成动画
+        var interval = 10; //每次动画移动的间隔时间
+        var speed = offset/(time/interval)   //总位移量除以次数计算出每次应该移动的距离
+        animated = true;
+        function go () {
+            if((speed < 0 && parseInt(list.style.left)  > newleft) || (speed > 0 && parseInt(list.style.left) < newleft)) {
+                list.style.left = parseInt(list.style.left) + speed + "px";
+                setTimeout(go, interval);   //计时器
+            }
+
+            else {
+                animated = false;
+                list.style.left = newleft + "px";
+                if(newleft > -625) {
+                    list.style.left = -3125 + "px";
+                }
+                if(newleft < -3125) {
+                    list.style.left = -625 + "px";
+                }
+            }
+            //debugger;
+        }
+        go();
+    }
+
+    //每3s滚动图片
+    function play () {
+        timer = setInterval(function () {
+            next.onclick();
+        }, 5000)
+    }
+
+    //当鼠标在轮播图内，停止滚动图片
+    function stop () {
+        clearInterval(timer)
+    }
+
+    container.onmouseover = stop;
+    container.onmouseout = play;
+    play();
+
+    next.onclick = function() {
+        if (animated == false) {   //保持小圆点和动画同时进行 ， 不然会出现动画和小圆点不匹配
+            if (index == 5) {
+                index = 1;
+            }
+            else {
+                index += 1;;
+            }
+            showBottons();
+            animate(-625);        /*把图片向左移动，隐藏掉*/
+        }
+    }
+
+    prev.onclick = function() {
+        if (animated == false) {
+            if (index == 1) {
+                index = 5;
+            }
+            else {
+                index -= 1;;
+            }
+            showBottons();
+            animate(625);
+        }
+    }
+
+    for(var i = 0; i < buttons.length; i++) {
+        buttons[i].onclick = function() {   //给每个小圆点绑定事件
+            if (this.className == "on") {
+                return ;
+            }
+            var myindex = parseInt(this.getAttribute("index")); /*这个方法可以得到之定义的属性*/
+            var offset = -625 * (myindex - index);
+
+            if(!animated){
+                animate(offset);
+            }
+
+            index = myindex;
+            showBottons();
+        }
+    }
+};
+    </script> 
   </body>
 </html>

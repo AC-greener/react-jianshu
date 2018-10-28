@@ -17,7 +17,7 @@ class Write extends PureComponent {
     const { loginStatus } = this.props;
     if(loginStatus) {
       return (
-        <h3 style = {myStyle}>right your code here</h3>
+        <h3 style = {myStyle}>write your code here</h3>
       )
     } else {
       return <Redirect to='/login' />
