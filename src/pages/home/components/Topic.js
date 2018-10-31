@@ -9,9 +9,9 @@ class Topic extends PureComponent {
         {
           this.props.list.map((item) => {
             return (
-              <a href= 'https://www.jianshu.com/c/8c92f845cd4d?utm_medium=index-collections&utm_source=desktop'>
-                <TopicItem key={item.get('id')}>
-                  <img
+              <a key={item.get('id')} href= 'https://www.jianshu.com/c/8c92f845cd4d?utm_medium=index-collections&utm_source=desktop'>
+                <TopicItem >
+                  <img 
                     className='topic-pic'
                     src={item.get('imgUrl')}
                     alt=''
